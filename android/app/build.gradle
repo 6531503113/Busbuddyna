@@ -1,0 +1,50 @@
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("dev.flutter.flutter-gradle-plugin")
+    // เพิ่ม Google services Gradle plugin
+    id("com.google.gms.google-services")
+}
+
+android {
+    namespace = "com.example.busbuddy"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.busbuddy"
+        minSdk = 23 // เปลี่ยนจาก flutter.minSdkVersion เป็น 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // นำเข้า Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    // เพิ่ม dependencies สำหรับ Firebase products ที่คุณต้องการใช้
+    implementation("com.google.firebase:firebase-analytics") // Firebase Analytics
+    implementation("com.google.firebase:firebase-auth") // Firebase Authentication
+    // คุณสามารถเพิ่ม Firebase product อื่น ๆ ได้ที่นี่
+    // implementation("com.google.firebase:firebase-firestore") // Firebase Firestore
+}
