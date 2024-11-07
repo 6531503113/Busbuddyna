@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '', name: ''); // ให้ค่าเริ่มต้นเป็นสตริงว่างสำหรับ email และ password
+  Profile profile = Profile(email: '', password: ''); // ให้ค่าเริ่มต้นเป็นสตริงว่างสำหรับ email และ password
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   @override
