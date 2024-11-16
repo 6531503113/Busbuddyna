@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562987836353",
+    "project_id": "busbuddy-55601",
+    "storage_bucket": "busbuddy-55601.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562987836353:android:856c71b3abde7a44f38540",
+        "android_client_info": {
+          "package_name": "com.example.busbuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUUWHg19FMciLiEjauiChEpLv6fxUAKwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
