@@ -1,12 +1,12 @@
+import 'package:busbuddy/screen/home.dart';
+import 'package:busbuddy/screen/homepage.dart';
+import 'package:busbuddy/screen/tableall/blue.dart';
+import 'package:busbuddy/screen/tableall/green.dart';
+import 'package:busbuddy/screen/tableall/lightgreen.dart';
+import 'package:busbuddy/screen/tableall/red.dart';
+import 'package:busbuddy/screen/welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:busbuddy/screen/homepage.dart';
-import 'package:busbuddy/screen/welcome.dart';
-import 'package:busbuddy/screen/tableall/lightgreen.dart';
-import 'package:busbuddy/screen/tableall/green.dart';
-import 'package:busbuddy/screen/tableall/red.dart';
-import 'package:busbuddy/screen/tableall/blue.dart';
-import 'package:busbuddy/screen/home.dart';
 
 class TablePage extends StatefulWidget {
   const TablePage({super.key});
@@ -25,12 +25,18 @@ class _TablePageState extends State<TablePage> {
 
     switch (index) {
       case 0:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
         break;
       case 1:
         break;
       case 2:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => WelcomeScreen()),
+        );
         break;
     }
   }
@@ -39,22 +45,26 @@ class _TablePageState extends State<TablePage> {
   Widget _buildCard(String title, String imagePath, Widget page) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => page));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
       },
       child: Card(
         elevation: 8,
-        shadowColor: Colors.black54,
+        shadowColor: Colors.blueGrey,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
               child: Image.asset(
                 imagePath,
-                height: 120,
+                height: 250,
+                width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
@@ -65,27 +75,31 @@ class _TablePageState extends State<TablePage> {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => page));
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => page),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: const Color.fromARGB(255, 218, 174, 243),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 10),
+                  elevation: 4,
                 ),
                 child: const Text(
-                  'เริ่มใช้งาน',
-                  style: TextStyle(fontSize: 16),
+                  'See detail',
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
             ),
@@ -99,30 +113,37 @@ class _TablePageState extends State<TablePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Table Menu'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text(
+          'Time schedule',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: const Color(0xFF1F1D36),
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.exit_to_app , size: 30), // ไอคอนสำหรับการออกจากระบบ
+            icon: const Icon(Icons.exit_to_app, size: 30),
             onPressed: () {
-              _showLogoutDialog(); // เรียกใช้ฟังก์ชันแสดง Popup Logout
+              _showLogoutDialog();
             },
           ),
         ],
       ),
-      backgroundColor: Colors.grey[100],
-      body: Padding(
+      body: Container(
+        color: const Color(0xFF1F1D36),
         padding: const EdgeInsets.all(16.0),
         child: GridView.count(
-          crossAxisCount: 1, // กำหนดจำนวนการ์ดต่อแถว
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
+          crossAxisCount: 1,
+          mainAxisSpacing: 30,
+          crossAxisSpacing: 20,
           children: [
-            _buildCard('ควย', 'assets/images/logo1.png', const GreenPage()),
-            _buildCard('อ่านทำเหี้ยไร', 'assets/images/logo1.png', const LightgreenPage()),
-            _buildCard('ยังจะอ่านอีก', 'assets/images/logo1.png', const RedPage()),
-            _buildCard('กาก', 'assets/images/logo1.png', const BluePage()),
+            _buildCard('CHIANG RAI - MAE SAI', 'assets/images/green.jpg', const GreenPage()),
+            _buildCard('CHIANG RAI - CHIANG SAEN', 'assets/images/lightgreen.jpg', const LightgreenPage()),
+            _buildCard('CHIANG RAI - MAE KHACHAN', 'assets/images/blue.jpg', const RedPage()),
+            _buildCard('CHIANG RAI - CHIANG KHONG', 'assets/images/red.jpg', const FlightApp()),
           ],
         ),
       ),
@@ -139,9 +160,9 @@ class _TablePageState extends State<TablePage> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: const Color(0xFF864879),
         unselectedItemColor: Colors.grey,
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 251, 251, 251),
       ),
     );
   }
@@ -157,20 +178,18 @@ class _TablePageState extends State<TablePage> {
             TextButton(
               child: const Text('Cancel'),
               onPressed: () {
-                Navigator.of(context).pop(); // ปิด Popup
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: const Text('Logout'),
               onPressed: () {
                 FirebaseAuth.instance.signOut().then((value) {
-                  // นำไปหน้า Home หรือหน้าล็อกอินใหม่เมื่อออกจากระบบ
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
                 }).catchError((error) {
-                  // แสดงข้อผิดพลาดถ้ามี
                   print("Logout failed: $error");
                 });
               },

@@ -28,12 +28,39 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^4.0.0 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/Logo1.png
+    - assets/images/green.jpg
+    - assets/images/lightgreen.jpg
+    - assets/images/blue.jpg
+    - assets/images/red.jpg
+    - assets/images/WatRongKhun.jpg
+    - assets/images/WatPhraKaew.jpg
+    - assets/images/WatHuayPlaKang.jpg
+    - assets/images/WatRongSueaTen.jpg
+    - assets/images/WatPhraThatDoiChomThong.jpg
+    - assets/images/DoiTungRoyalVilla.jpg
+    - assets/images/SinghaPark.jpg
+    - assets/images/BaanDam.jpg
+    - assets/images/GoldenTrianglePark.jpg
+    - assets/images/DoiMaeSalong.jpg
+    - assets/images/DoiTung.jpg
+    - assets/images/DoiPhuKa.jpg
+    - assets/images/DoiPhaTang.jpg
+    - assets/images/PhuChiFaForestPark.jpg
+    - assets/images/KhunChaeNationalPark.jpg
+    - assets/images/KhunKornWaterfall.jpg
+    - assets/images/PongPhrabatWaterfall.jpg
+    - assets/images/AkhaFarmville.jpg
+    - assets/images/MaeSaiBorder.jpg
+    - assets/images/ChouiFongTea.jpg
+    - assets/images/maekhachanhotspring.jpg
 
+
+    
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

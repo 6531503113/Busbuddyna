@@ -3,14 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import '/model/profile.dart';
-<<<<<<< HEAD
-import 'homepage.dart';
-import 'login.dart';
-=======
-import 'home.dart';
 
->>>>>>> 23e573b7010c8ef15e6102590944b40c0db2d080
+import '/model/profile.dart';
+import 'home.dart';
+import 'login.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -26,7 +23,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-<<<<<<< HEAD
       future: firebase,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -88,8 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(height: 5),
                             TextFormField(
                               validator: MultiValidator([
-                                RequiredValidator(errorText: "กรุณาป้อนอีเมลด้วยครับ"),
-                                EmailValidator(errorText: "รูปแบบอีเมลไม่ถูกต้อง")
+                                RequiredValidator(errorText: "Please enter your email address"),
+                                EmailValidator(errorText: "Email format is invalid")
                               ]).call,
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (String? email) {
@@ -112,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             const SizedBox(height: 5),
                             TextFormField(
-                              validator: RequiredValidator(errorText: "กรุณาป้อนรหัสผ่านด้วยครับ").call,
+                              validator: RequiredValidator(errorText: "Please enter your password").call,
                               obscureText: true,
                               onSaved: (String? password) {
                                 profile.password = password ?? '';
@@ -146,21 +142,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           .then((value) {
                                         formKey.currentState!.reset();
                                         Fluttertoast.showToast(
-                                            msg: "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว",
+                                            msg: "User account created successfully",
                                             gravity: ToastGravity.TOP);
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(builder: (context) {
-                                          return const HomePage();
+                                          return const HomeScreen();
                                         }));
                                       });
                                     } on FirebaseAuthException catch (e) {
                                       String message;
                                       if (e.code == 'email-already-in-use') {
-                                        message = "มีอีเมลนี้ในระบบแล้วครับ โปรดใช้อีเมลอื่นแทน";
+                                        message = "This email is already in the system. Please use another email instead";
                                       } else if (e.code == 'weak-password') {
-                                        message = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+                                        message = "Password must be at least 6 characters long";
                                       } else {
-                                        message = e.message ?? "เกิดข้อผิดพลาด";
+                                        message = e.message ?? "An error occurred";
                                       }
                                       Fluttertoast.showToast(
                                           msg: message,
@@ -198,104 +194,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                           ],
-=======
-        future: firebase,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("Error"),
-              ),
-              body: Center(
-                child: Text("${snapshot.error}"),
-              ),
-            );
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("สร้างบัญชีผู้ใช้"),
-              ),
-              body: Container(
-                padding: const EdgeInsets.all(20.0),
-                child: Form(
-                  key: formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("อีเมล", style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator: MultiValidator([
-                            RequiredValidator(errorText: "กรุณาป้อนอีเมลด้วยครับ"),
-                            EmailValidator(errorText: "รูปแบบอีเมลไม่ถูกต้อง")
-                          ]).call,
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String? email) {
-                            profile.email = email ?? '';
-                          },
->>>>>>> 23e573b7010c8ef15e6102590944b40c0db2d080
                         ),
-                        const SizedBox(height: 15),
-                        const Text("รหัสผ่าน", style: TextStyle(fontSize: 20)),
-                        TextFormField(
-                          validator: RequiredValidator(errorText: "กรุณาป้อนรหัสผ่านด้วยครับ").call,
-                          obscureText: true,
-                          onSaved: (String? password) {
-                            profile.password = password ?? '';
-                          },
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: const Text("ลงทะเบียน", style: TextStyle(fontSize: 20)),
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                                try {
-                                  await FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: profile.email,
-                                          password: profile.password)
-                                      .then((value) {
-                                    formKey.currentState!.reset();
-                                    Fluttertoast.showToast(
-                                        msg: "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว",
-                                        gravity: ToastGravity.TOP);
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const HomeScreen();
-                                    }));
-                                  });
-                                } on FirebaseAuthException catch (e) {
-                                  String message;
-                                  if (e.code == 'email-already-in-use') {
-                                    message = "มีอีเมลนี้ในระบบแล้วครับ โปรดใช้อีเมลอื่นแทน";
-                                  } else if (e.code == 'weak-password') {
-                                    message = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
-                                  } else {
-                                    message = e.message ?? "เกิดข้อผิดพลาด";
-                                  }
-                                  Fluttertoast.showToast(
-                                      msg: message,
-                                      gravity: ToastGravity.CENTER);
-                                }
-                              }
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          }
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
             ),
           );
-        });
+        }
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    );
   }
 }
